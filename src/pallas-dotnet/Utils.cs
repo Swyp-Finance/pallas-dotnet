@@ -39,7 +39,14 @@ public class Utils
         => new(
             new Address([.. rsTransactionOutput.address]),
             MapPallasValue(rsTransactionOutput.amount),
-            rsTransactionOutput.index
+            rsTransactionOutput.index,
+            rsTransactionOutput.datum as object is null
+                ? null
+                : (DatumType)rsTransactionOutput.datum.datumType == 0 ? null 
+                    : new Datum(
+                        (DatumType)rsTransactionOutput.datum.datumType,
+                        [.. rsTransactionOutput.datum.data]
+                    )
         );
 
     public static Value MapPallasValue(PallasDotnetRs.PallasDotnetRs.Value rsValue)

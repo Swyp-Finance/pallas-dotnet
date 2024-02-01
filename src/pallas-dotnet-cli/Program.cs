@@ -54,7 +54,7 @@ nodeClient.ChainSyncNextResponse += (sender, args) =>
     table.AddRow("[blue]TX Count[/]", nextResponse.Block.TransactionBodies.Count().ToString());
 
     // Calculate input count, output count, assets count, and total ADA output
-    int inputCount = 0, outputCount = 0, assetsCount = 0;
+    int inputCount = 0, outputCount = 0, assetsCount = 0, datumCount = 0;
     ulong totalADAOutput = 0;
 
     foreach (var transactionBody in nextResponse.Block.TransactionBodies)
@@ -62,6 +62,7 @@ nodeClient.ChainSyncNextResponse += (sender, args) =>
         inputCount += transactionBody.Inputs.Count();
         outputCount += transactionBody.Outputs.Count();
         assetsCount += transactionBody.Outputs.Sum(o => o.Amount.MultiAsset.Count);
+        datumCount += transactionBody.Outputs.Count(o => o.Datum != null);
         transactionBody.Outputs.ToList().ForEach(o => totalADAOutput += o.Amount.Coin);
     }
 
@@ -69,6 +70,7 @@ nodeClient.ChainSyncNextResponse += (sender, args) =>
     table.AddRow("[green]Input Count[/]", inputCount.ToString());
     table.AddRow("[green]Output Count[/]", outputCount.ToString());
     table.AddRow("[green]Assets Count[/]", assetsCount.ToString());
+    table.AddRow("[green]Datum Count[/]", datumCount.ToString());
 
     var totalADAFormatted = (totalADAOutput / 1000000m).ToString("N6") + " ADA";
     table.AddRow("[green]Total ADA Output[/]", totalADAFormatted);
@@ -81,14 +83,11 @@ nodeClient.ChainSyncNextResponse += (sender, args) =>
 };
 
 await nodeClient.StartChainSyncAsync(new Point(
-    110501698,
-    new Hash("49ec3dc2ee4c2dd457117580e20997d4cc094aa6343f653c9b68a020599c249e")
+    35197575,
+    new Hash("a9e99c93352f91233a61fb55da83a43c49abf1c84a636e226e11be5ac0343dc3")
 ));
 
 while (true)
 {
-    if (Console.ReadKey().Key == ConsoleKey.Escape)
-    {
-        break;
-    }
+    await Task.Delay(1000);
 }

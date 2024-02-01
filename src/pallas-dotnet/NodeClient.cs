@@ -61,14 +61,12 @@ public class NodeClient
             });
         }
 
-        _ = Task.Run(() =>
+        _= Task.Run(() =>
         {
             IsSyncing = true;
             while (IsSyncing)
             {
-
                 var nextResponseRs = PallasDotnetRs.PallasDotnetRs.ChainSyncNext(_nodeClient.Value);
-                
 
                 if ((NextResponseAction)nextResponseRs.action == NextResponseAction.Error)
                 {

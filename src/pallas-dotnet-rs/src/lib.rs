@@ -22,8 +22,8 @@ lazy_static! {
     static ref RT: Runtime = Runtime::new().expect("Failed to create Tokio runtime");
 }
 
-const DATUM_TYPE_HASH: u8 = 0;
-const DATUM_TYPE_DATA: u8 = 1;
+const DATUM_TYPE_HASH: u8 = 1;
+const DATUM_TYPE_DATA: u8 = 2;
 
 #[derive(Net)]
 pub struct NetworkMagic {}
