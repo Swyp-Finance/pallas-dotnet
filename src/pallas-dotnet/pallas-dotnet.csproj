@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <PackageId>Pallas.NET</PackageId>
-    <Version>0.1.12</Version>
+    <Version>0.1.13</Version>
     <VersionSuffix>beta</VersionSuffix>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
