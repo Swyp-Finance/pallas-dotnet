@@ -17,7 +17,7 @@ static double GetCurrentMemoryUsageInMB()
 }
 
 var nodeClient = new NodeClient();
-var tip = await nodeClient.ConnectAsync("/home/rawriclark/.dmtr/tmp/tasteful-infusion-213dd4/mainnet-v135.socket", NetworkMagic.MAINNET);
+var tip = await nodeClient.ConnectAsync("/tmp/node.socket", NetworkMagic.PREVIEW);
 
 nodeClient.Disconnected += (sender, args) =>
 {
