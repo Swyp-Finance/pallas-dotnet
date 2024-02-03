@@ -1,6 +1,7 @@
 namespace PallasDotnet.Models;
 
 public enum DatumType {
+    NoDatum,
     DatumHash,
     InlineDatum
 }
