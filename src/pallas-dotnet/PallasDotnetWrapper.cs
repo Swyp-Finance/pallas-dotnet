@@ -30,6 +30,7 @@ namespace PallasDotnetRs
             public List<byte> id;
             public List<TransactionInput> inputs;
             public List<TransactionOutput> outputs;
+            public UIntPtr index;
         }
         public struct TransactionInput {
             public List<byte> id;
@@ -149,7 +150,7 @@ namespace PallasDotnetRs
                     slot = structArg.slot,
                     hash = _AllocSlice<byte, byte>(structArg.hash, 1, 1, _arg5 => _arg5),
                     number = structArg.number,
-                    transactionBodies = _AllocSlice<TransactionBody, _StructTransactionBody>(structArg.transactionBodies, 48, 8, _arg6 => _StructTransactionBody.Encode(_arg6))
+                    transactionBodies = _AllocSlice<TransactionBody, _StructTransactionBody>(structArg.transactionBodies, 56, 8, _arg6 => _StructTransactionBody.Encode(_arg6))
                 };
             }
             public Block Decode() {
@@ -157,7 +158,7 @@ namespace PallasDotnetRs
                     slot = this.slot,
                     hash = _FreeSlice<byte, byte, List<byte>>(this.hash, 1, 1, _arg7 => _arg7),
                     number = this.number,
-                    transactionBodies = _FreeSlice<TransactionBody, _StructTransactionBody, List<TransactionBody>>(this.transactionBodies, 48, 8, _arg8 => (_arg8).Decode())
+                    transactionBodies = _FreeSlice<TransactionBody, _StructTransactionBody, List<TransactionBody>>(this.transactionBodies, 56, 8, _arg8 => (_arg8).Decode())
                 };
             }
         }
@@ -166,18 +167,21 @@ namespace PallasDotnetRs
             public _RawSlice id;
             public _RawSlice inputs;
             public _RawSlice outputs;
+            public UIntPtr index;
             public static _StructTransactionBody Encode(TransactionBody structArg) {
                 return new _StructTransactionBody {
                     id = _AllocSlice<byte, byte>(structArg.id, 1, 1, _arg9 => _arg9),
                     inputs = _AllocSlice<TransactionInput, _StructTransactionInput>(structArg.inputs, 24, 8, _arg10 => _StructTransactionInput.Encode(_arg10)),
-                    outputs = _AllocSlice<TransactionOutput, _StructTransactionOutput>(structArg.outputs, 88, 8, _arg11 => _StructTransactionOutput.Encode(_arg11))
+                    outputs = _AllocSlice<TransactionOutput, _StructTransactionOutput>(structArg.outputs, 88, 8, _arg11 => _StructTransactionOutput.Encode(_arg11)),
+                    index = structArg.index
                 };
             }
             public TransactionBody Decode() {
                 return new TransactionBody {
                     id = _FreeSlice<byte, byte, List<byte>>(this.id, 1, 1, _arg12 => _arg12),
                     inputs = _FreeSlice<TransactionInput, _StructTransactionInput, List<TransactionInput>>(this.inputs, 24, 8, _arg13 => (_arg13).Decode()),
-                    outputs = _FreeSlice<TransactionOutput, _StructTransactionOutput, List<TransactionOutput>>(this.outputs, 88, 8, _arg14 => (_arg14).Decode())
+                    outputs = _FreeSlice<TransactionOutput, _StructTransactionOutput, List<TransactionOutput>>(this.outputs, 88, 8, _arg14 => (_arg14).Decode()),
+                    index = this.index
                 };
             }
         }

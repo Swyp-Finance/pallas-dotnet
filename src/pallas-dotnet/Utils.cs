@@ -26,7 +26,8 @@ public class Utils
         => new(
             new Hash([.. rsTransactionBody.id]),
             rsTransactionBody.inputs.Select(MapPallasTransactionInput),
-            rsTransactionBody.outputs.Select(MapPallasTransactionOutput)
+            rsTransactionBody.outputs.Select(MapPallasTransactionOutput),
+            rsTransactionBody.index
         );
 
     public static TransactionInput MapPallasTransactionInput(PallasDotnetRs.PallasDotnetRs.TransactionInput rsTransactionInput)

@@ -69,6 +69,7 @@ pub struct TransactionBody {
     id: Vec<u8>,
     inputs: Vec<TransactionInput>,
     outputs: Vec<TransactionOutput>,
+    index: usize
 }
 
 #[derive(Net)]
@@ -250,8 +251,10 @@ impl NodeClientWrapper {
                                 transaction_bodies: b
                                     .txs()
                                     .into_iter()
-                                    .map(|tx_body| TransactionBody {
+                                    .enumerate()
+                                    .map(|(index, tx_body)| TransactionBody {
                                         id: tx_body.hash().to_vec(),
+                                        index,
                                         inputs: tx_body
                                             .inputs()
                                             .into_iter()
